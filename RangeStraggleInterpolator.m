@@ -1,3 +1,3 @@
-function [Range, Straggle] = RangeStraggleInterpolator()
-
+function [InterpRange, InterpStraggle] = RangeStraggleInterpolator(Energies, Ranges, Straggle)
+    
 end
