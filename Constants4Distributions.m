@@ -14,7 +14,8 @@ function [C] = Constants4Distributions(Energy,Range,Straggle,UserFunction,ReNorm
     %Return:
     %   C: an array of constants describing the ions to be implanted for
     %       each energy
-    x = Domain(1):0.1:Domain(2);
+    
+    x = Domain(1):1:Domain(2);
     ETerms = length(Energy);
     XTerms = length(x);
     

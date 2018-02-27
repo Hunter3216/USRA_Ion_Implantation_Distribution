@@ -26,37 +26,15 @@ function [Energy,Range,Straggle] = Data_Get(path)
     
     %Extracts these data from the relevant columns
     Energy = str2double(split(:,1));
-    EnergyUnits = (split(:,2));
+    EnergyUnits = split(:,2);
     Range = str2double(split(:,5));
-    RangeUnits = (split(:,6));
+    RangeUnits = split(:,6);
     Straggle = str2double(split(:,7));
-    StraggleUnits = (split(:,8));
+    StraggleUnits = split(:,8);
     
     %Corrects Energy by switching to keV, Range all to A, Straggle all to A
     for k = 1 : length(Energy)
-        switch EnergyUnits{k}
-            case 'eV'
-                Energy(k) = Energy(k)/1000;
-            case 'keV'
-            case 'MeV'
-                Energy(k) = Energy(k)*1000;
-            otherwise
-                error('Data_Get:UnknownUnit',['Unknown unit type for energy:',EnergyUnits{k}])
-        end
-        switch RangeUnits{k}
-            case 'A'
-            case 'um'
-                Range(k) = Range(k) * 10000;
-            otherwise
-                error('Data_Get:UnknownUnit',['Unknown unit type for range:',RangeUnits{k}])
-        end
-        switch StraggleUnits{k}
-            case 'A'
-            case 'um'
-                Straggle(k) = Straggle(k) * 10000;
-            otherwise
-                error('Data_Get:UnknownUnit',['Unknown unit type for straggle:',StraggleUnits{k}])
-        end                
+        
+        
     end
 end
-

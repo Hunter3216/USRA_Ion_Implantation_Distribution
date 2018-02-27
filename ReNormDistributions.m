@@ -16,7 +16,7 @@ function [ReNorm] = ReNormDistributions(Energy,Range,Straggle)
     
     for DistNum = 1 : N
         Distribution = @(x)(1/(sqrt(2*pi)*Straggle(DistNum)))*exp((-1/2)*((x-Range(DistNum))/(Straggle(DistNum))).^2);
-        ReNorm(DistNum) = 1 - integral(Distribution,-(5*Straggle(DistNum)),0,'RelTol',1e-10,'AbsTol',1e-15);
+        ReNorm(DistNum) = 1 - integral(Distribution,-(20*Straggle(DistNum)),0,'RelTol',1e-15,'AbsTol',1e-18);
     end
     
 end
