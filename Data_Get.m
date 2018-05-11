@@ -1,4 +1,4 @@
-function [Energy,Range,Straggle] = Data_Get(path)
+function [Energy,Range,StraggleLong, StraggleLat] = Data_Get(path)
     %Purpose: To read a SRIM text file (given it's path) and return the relevant
     %   info (Energy, Range, Straggle)
     %Pre-Conditions:
@@ -29,8 +29,10 @@ function [Energy,Range,Straggle] = Data_Get(path)
     EnergyUnits = (split(:,2));
     Range = str2double(split(:,5));
     RangeUnits = (split(:,6));
-    Straggle = str2double(split(:,7));
-    StraggleUnits = (split(:,8));
+    StraggleLong = str2double(split(:,7));
+    StraggleLongUnits = (split(:,8));
+    StraggleLat = str2double(split(:,9));
+    StraggleLatUnits = (split(:,10));
     
     %Corrects Energy by switching to keV, Range all to A, Straggle all to A
     for k = 1 : length(Energy)
@@ -50,13 +52,20 @@ function [Energy,Range,Straggle] = Data_Get(path)
             otherwise
                 error('Data_Get:UnknownUnit',['Unknown unit type for range:',RangeUnits{k}])
         end
-        switch StraggleUnits{k}
+        switch StraggleLongUnits{k}
             case 'A'
             case 'um'
-                Straggle(k) = Straggle(k) * 10000;
+                StraggleLong(k) = StraggleLong(k) * 10000;
             otherwise
-                error('Data_Get:UnknownUnit',['Unknown unit type for straggle:',StraggleUnits{k}])
-        end                
+                error('Data_Get:UnknownUnit',['Unknown unit type for straggle:',StraggleLongUnits{k}])
+        end
+        switch StraggleLatUnits{k}
+            case 'A'
+            case 'um'
+                StraggleLat(k) = StraggleLat(k) * 10000;
+            otherwise
+                error('Data_Get:UnknownUnit',['Unknown unit type for straggle:',StraggleLatUnits{k}])
+        end
     end
 end
 
